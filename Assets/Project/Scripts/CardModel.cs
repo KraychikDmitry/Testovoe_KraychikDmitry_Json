@@ -21,24 +21,24 @@ public class CardModel : MonoBehaviour
         }
     }
 
-    private RectTransform model;
+    private RectTransform viewport;
     private RectTransform rectTransform;
 
     private void Awake()
     {
         dataBase = transform.parent.parent.GetComponent<DataBase>();
+        viewport = transform.parent.parent.GetComponent<RectTransform>();
         cardView = GetComponent<CardView>();
-        model = transform.parent.parent.GetComponent<RectTransform>();
         rectTransform = GetComponent<RectTransform>();
     }
 
-    private Vector3[] modelCorners = new Vector3[4];
+    private Vector3[] viewportCorners = new Vector3[4];
     private Vector3[] thisCorners = new Vector3[4];
     private void Update()
     {
         rectTransform.GetWorldCorners(thisCorners);
-        model.GetWorldCorners(modelCorners);
-        if (thisCorners[1].y < modelCorners[0].y || thisCorners[0].y > modelCorners[1].y)
+        viewport.GetWorldCorners(viewportCorners);
+        if (thisCorners[1].y < viewportCorners[0].y || thisCorners[0].y > viewportCorners[1].y)
         {
             gameObject.SetActive(false);
         }

@@ -11,7 +11,7 @@ public class Model : MonoBehaviour
 
     private static int CardsCountAtPage = 10;
     private RectTransform[] cardsRect = new RectTransform[CardsCountAtPage];
-    private СardModel[] cardsModel = new СardModel[CardsCountAtPage];
+    private CardModel[] cardsModel = new CardModel[CardsCountAtPage];
 
     private float cardHeight;
 
@@ -28,7 +28,7 @@ public class Model : MonoBehaviour
         for (int i = 0; i < CardsCountAtPage; i++)
         {
             GameObject a = Instantiate(cardPrefab, cardsContainerRect); // Создаём пул
-            cardsModel[i] = a.GetComponent<СardModel>(); // Набираем массив моделей карточек
+            cardsModel[i] = a.GetComponent<CardModel>(); // Набираем массив моделей карточек
             cardsRect[i] = a.GetComponent<RectTransform>(); // Набираем массив ректов карточек
             cardsRect[i].localPosition = new(cardsRect[0].localPosition.x, cardHeight * i, cardsRect[0].localPosition.z); // Выстраиваем пул карточек красивым списком
         }
@@ -59,7 +59,7 @@ public class Model : MonoBehaviour
             if (cardsRect[i].gameObject.activeSelf == false) // ищем карточку в пуле, готовую к перемещению 
             {
                 int minID = scrollDirectionUp ? database.cardsData.data.Length : 0;
-                foreach (СardModel item in cardsModel) // поиск крайней активной карточки
+                foreach (CardModel item in cardsModel) // поиск крайней активной карточки
                 {
                     if (item.gameObject.activeSelf == true && (scrollDirectionUp ? (item.cardID < minID) : (item.cardID > minID)))
                     {
